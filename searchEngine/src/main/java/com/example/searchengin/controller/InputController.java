@@ -17,8 +17,13 @@ public class InputController {
 
     InputServices inputServices = new InputServices();
     Tree myTree;
-    @GetMapping("/yearFilter")
+    @GetMapping("/readFiles")
     public ResponseEntity<String> f1() throws FileNotFoundException, InterruptedException {
-        return new ResponseEntity<>(inputServices.readFiles(), HttpStatus.OK);
+        return new ResponseEntity<>(inputServices.readFilesAndBuildTree(), HttpStatus.OK);
+    }
+
+    @GetMapping("/searchWord")
+    public ResponseEntity<Boolean> f2() {
+        return new ResponseEntity<>(myTree.wordExist("Covington"), HttpStatus.OK);
     }
 }
